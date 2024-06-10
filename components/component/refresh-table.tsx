@@ -36,6 +36,7 @@ import {
 } from "@/components/ui/dialog";
 import FormPonto from "./form-ponto";
 import RefreshTableData from "./table";
+import MapaRoot from "./mapa-context";
 
 export async function RefreshTable() {
   return (
@@ -103,7 +104,9 @@ export async function RefreshTable() {
               refrescamento.
             </DialogDescription>
           </DialogHeader>
+          {/* <MapaRoot containerID="map"> */}
           <FormPonto />
+          {/* </MapaRoot> */}
         </DialogContent>
       </Dialog>
     </div>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -26,40 +26,39 @@ import { Button } from "../ui/button";
 import { useFormState } from "react-dom";
 import { cn } from "@/lib/utils";
 import { GlobeIcon } from "lucide-react";
-import { useMap } from "@/hooks/useMap";
-import mapboxgl from "mapbox-gl";
-
-const token =
-  "pk.eyJ1Ijoic2t5LTIwMjQiLCJhIjoiY2x3eG5lcmZpMWNpNzJucjFoN2dwYnFiMSJ9.4IEOvqX3dGRZpyHPx-MD9g";
-mapboxgl.accessToken = token;
+import { updateRefreshment } from "@/actions/update-refreshment";
+import { useRouter } from "next/navigation";
+import { Ponto } from "@/hooks/useGetPontos";
 
 const initialState = {
-  message: "",
-  status: "",
-  value: "",
+  error: false,
+  sucesso: false,
 };
 
-function FormPonto() {
-  const [state, formAction] = useFormState(saveRefreshment, initialState);
-  const { map } = useMap("map");
-  const [config, setConfig] = useState({ showMap: false, point: "" });
-  const refMarker = useRef<mapboxgl.Marker>(new mapboxgl.Marker());
-
-  useEffect(() => {
-    map &&
-      map.on("click", (evt) => {
-        setConfig((prev) => ({
-          ...prev,
-          point: `${evt.lngLat.lng};${evt.lngLat.lat}`,
-        }));
-        refMarker.current.setLngLat(evt.lngLat);
-        refMarker.current.addTo(map);
-      });
-  }, [map]);
+function FormPontoEdit({ data }: { data: Ponto & { id: string } }) {
+  const router = useRouter();
+  const [state, setState] = useState<typeof initialState>(initialState);
 
   return (
-    <form action={formAction}>
+    <form
+      // action={formAction}
+
+      onSubmit={async (evt) => {
+        const formData = new FormData(evt.currentTarget);
+        evt.preventDefault();
+        setState({ error: false, sucesso: false });
+
+        const result = await updateRefreshment({}, formData);
+
+        setState(result);
+        if (result.sucesso) {
+          router.refresh();
+        }
+      }}
+      method="post"
+    >
       <div className="grid gap-4 py-4">
+        <input type="hidden" name="id" value={data.id} />
         <div className="grid items-center grid-cols-4 gap-4">
           <Label className="text-right" htmlFor="name">
             Ponto
@@ -69,6 +68,7 @@ function FormPonto() {
             id="name"
             name="ponto"
             placeholder="Nome do ponto de refrescamento"
+            defaultValue={data.ponto}
           />
         </div>
         <div className="grid items-center grid-cols-4 gap-4">
@@ -81,44 +81,37 @@ function FormPonto() {
             placeholder="Número máximo de pessoas"
             type="number"
             name="total"
+            defaultValue={data.total}
           />
         </div>
         <div className="grid items-center grid-cols-4 gap-4">
           <Label className="text-right" htmlFor="coordinates">
             Coordenadas
           </Label>
-          {/* <Dialog>
-            <DialogTrigger asChild> */}
-          <input type="hidden" name="coords" value={config.point} />
-          <Button
-            className="border-2 border-slate-300 col-span-3 overflow-hidden"
-            variant="secondary"
-            type="button"
-            onClick={() => {
-              setConfig((prev) => ({
-                ...prev,
-                showMap: !prev.showMap,
-              }));
-            }}
-          >
-            <GlobeIcon className="w-4 h-4 mr-2" />
-            {config.point}
-          </Button>
-          {/* </DialogTrigger>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button
+                className="border-2 border-slate-300 col-span-3"
+                variant="secondary"
+              >
+                <GlobeIcon className="w-4 h-4 mr-2" />
+                Coordenadas
+              </Button>
+            </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-            <DialogTitle className="">Coordenadas</DialogTitle>
-            <DialogDescription>Selecione as coordenadas</DialogDescription>
-            </DialogHeader>
+              <DialogHeader>
+                <DialogTitle className="">Coordenadas</DialogTitle>
+                <DialogDescription>Selecione as coordenadas</DialogDescription>
+              </DialogHeader>
+              {/* <FormPonto /> */}
             </DialogContent>
-          </Dialog> */}
+          </Dialog>
         </div>
-        <div id="map" className={cn("max-h-40 min-h-40")}></div>
         <div className="grid items-center grid-cols-4 gap-4">
           <Label className="text-right" htmlFor="estado">
             Estado
           </Label>
-          <Select name="estado">
+          <Select name="estado" defaultValue={data.estado}>
             <SelectTrigger className="col-span-3">
               <SelectValue placeholder="Selecione o estado" />
             </SelectTrigger>
@@ -136,24 +129,25 @@ function FormPonto() {
           <p
             className={cn(
               "col-span-4 text-center font-bold text-xs",
-              state.status === "ok" && "text-green-600",
-              state.status !== "ok" && "text-red-600"
+              state.sucesso && "text-green-600",
+              state.error && "text-red-600"
             )}
           >
-            {state.message}
+            {state.sucesso && "Dados actualizado"}
+            {state.error && "Erro ao actualizar dados"}
           </p>
         </div>
       </div>
       <DialogFooter>
         <Button type="submit" variant={"default"}>
-          Salvar
+          Actualizar
         </Button>
-        <Button type="reset" variant={"outline"}>
+        {/* <Button type="reset" variant={"outline"}>
           Limpar
-        </Button>
+        </Button> */}
       </DialogFooter>
     </form>
   );
 }
 
-export default FormPonto;
+export default FormPontoEdit;

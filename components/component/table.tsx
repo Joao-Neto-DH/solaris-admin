@@ -7,10 +7,19 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import { Button } from "../ui/button";
-import { FilePenIcon } from "lucide-react";
 import { getAllPontos } from "@/lib/getAllPontos";
 import DeleteForm from "./delete-form";
+import FormPontoEdit from "./form-ponto-edit";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
+import { Button } from "../ui/button";
+import { EditIcon } from "lucide-react";
 
 async function RefreshTableData() {
   const { pontos, error, sucesso } = await getAllPontos();
@@ -36,10 +45,23 @@ async function RefreshTableData() {
               <TableCell>{ponto.coords}</TableCell>
               <TableCell>{ponto.estado}</TableCell>
               <TableCell>
-                <Button size="icon" variant="ghost">
-                  <FilePenIcon className="w-4 h-4" />
-                  <span className="sr-only">Edit</span>
-                </Button>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button className="" variant="ghost">
+                      <EditIcon className="w-4 h-4" />
+                      {/* Coordenadas */}
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                      <DialogTitle className="">Editar ponto</DialogTitle>
+                      <DialogDescription>
+                        Preencha os campos que deseja actualizar
+                      </DialogDescription>
+                    </DialogHeader>
+                    <FormPontoEdit data={{ ...ponto }} />
+                  </DialogContent>
+                </Dialog>
               </TableCell>
               <TableCell>
                 <DeleteForm ponto={ponto} />
