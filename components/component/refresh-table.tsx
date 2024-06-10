@@ -38,22 +38,13 @@ import {
   DialogTitle,
   DialogDescription,
   DialogHeader,
-  DialogFooter,
+  // DialogFooter,
   DialogContent,
   Dialog,
 } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import FormPonto from "./form-ponto";
 
-export function RefreshTable() {
+export async function RefreshTable() {
   return (
     <div className="flex flex-col w-full min-h-screen">
       <header className="flex items-center h-16 px-4 border-b shrink-0 md:px-6">
@@ -186,71 +177,7 @@ export function RefreshTable() {
               refrescamento.
             </DialogDescription>
           </DialogHeader>
-          <form action=".">
-            <div className="grid gap-4 py-4">
-              <div className="grid items-center grid-cols-4 gap-4">
-                <Label className="text-right" htmlFor="name">
-                  Ponto
-                </Label>
-                <Input
-                  className="col-span-3"
-                  id="name"
-                  name="ponto"
-                  placeholder="Nome do ponto de refrescamento"
-                />
-              </div>
-              <div className="grid items-center grid-cols-4 gap-4">
-                <Label className="text-right" htmlFor="maxPeople">
-                  Total
-                </Label>
-                <Input
-                  className="col-span-3"
-                  id="maxPeople"
-                  placeholder="Número máximo de pessoas"
-                  type="number"
-                  name="total"
-                />
-              </div>
-              <div className="grid items-center grid-cols-4 gap-4">
-                <Label className="text-right" htmlFor="coordinates">
-                  Coordenadas
-                </Label>
-                <Input
-                  className="col-span-3"
-                  id="coordinates"
-                  placeholder="Coordenadas (ex: -23.5505, -46.6333)"
-                  name="coords"
-                />
-              </div>
-              <div className="grid items-center grid-cols-4 gap-4">
-                <Label className="text-right" htmlFor="estado">
-                  Estado
-                </Label>
-                <Select name="estado">
-                  <SelectTrigger className="col-span-3">
-                    <SelectValue placeholder="Selecione o estado" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      {/* <SelectLabel>Fruits</SelectLabel> */}
-                      <SelectItem value="funcional">FUNCIONAL</SelectItem>
-                      <SelectItem value="indisponivel">INDISPONÍVEL</SelectItem>
-                      <SelectItem value="cheio">CHEIO</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-                {/* <Select
-              // className="col-span-3" id="status"
-              >
-                <option value="active">Ativo</option>
-                <option value="inactive">Inativo</option>
-              </Select> */}
-              </div>
-            </div>
-            <DialogFooter>
-              <Button type="submit">Salvar</Button>
-            </DialogFooter>
-          </form>
+          <FormPonto />
         </DialogContent>
       </Dialog>
     </div>
