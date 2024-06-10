@@ -3,7 +3,7 @@
 import { collection, addDoc } from "firebase/firestore";
 import firebaseDB from "@/utils/db";
 
-export async function saveRefreshment(prev: any, data: FormData) {
+export async function saveRefreshment(_: any, data: FormData) {
   // console.log("data", data);
   // console.log("prev", prev);
 

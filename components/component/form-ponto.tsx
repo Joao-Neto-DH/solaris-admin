@@ -75,9 +75,9 @@ function FormPonto() {
             <SelectContent>
               <SelectGroup>
                 {/* <SelectLabel>Fruits</SelectLabel> */}
-                <SelectItem value="funcional">FUNCIONAL</SelectItem>
-                <SelectItem value="indisponivel">INDISPONÍVEL</SelectItem>
-                <SelectItem value="cheio">CHEIO</SelectItem>
+                <SelectItem value="FUNCIONAL">FUNCIONAL</SelectItem>
+                <SelectItem value="INDISPONÍVEL">INDISPONÍVEL</SelectItem>
+                <SelectItem value="CHEIO">CHEIO</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>

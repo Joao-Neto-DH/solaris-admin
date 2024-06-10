@@ -26,14 +26,6 @@ To read more about using these font, please visit the Next.js documentation:
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
-  TableHead,
-  TableRow,
-  TableHeader,
-  TableCell,
-  TableBody,
-  Table,
-} from "@/components/ui/table";
-import {
   DialogTrigger,
   DialogTitle,
   DialogDescription,
@@ -43,6 +35,7 @@ import {
   Dialog,
 } from "@/components/ui/dialog";
 import FormPonto from "./form-ponto";
+import RefreshTableData from "./table";
 
 export async function RefreshTable() {
   return (
@@ -87,74 +80,7 @@ export async function RefreshTable() {
       </header>
       <main className="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10">
         <div className="border shadow-sm rounded-lg p-2">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Ponto de Refrescamento</TableHead>
-                <TableHead>Número Máximo de Pessoas</TableHead>
-                <TableHead>Coordenadas</TableHead>
-                <TableHead>Estado</TableHead>
-                <TableHead>Editar</TableHead>
-                <TableHead>Remover</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell>Praça da Sé</TableCell>
-                <TableCell>100</TableCell>
-                <TableCell>-23.5505, -46.6333</TableCell>
-                <TableCell>Ativo</TableCell>
-                <TableCell>
-                  <Button size="icon" variant="ghost">
-                    <FilePenIcon className="w-4 h-4" />
-                    <span className="sr-only">Edit</span>
-                  </Button>
-                </TableCell>
-                <TableCell>
-                  <Button size="icon" variant="ghost">
-                    <Trash2Icon className="w-4 h-4" />
-                    <span className="sr-only">Remove</span>
-                  </Button>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Parque do Ibirapuera</TableCell>
-                <TableCell>500</TableCell>
-                <TableCell>-23.5861, -46.6546</TableCell>
-                <TableCell>Ativo</TableCell>
-                <TableCell>
-                  <Button size="icon" variant="ghost">
-                    <FilePenIcon className="w-4 h-4" />
-                    <span className="sr-only">Edit</span>
-                  </Button>
-                </TableCell>
-                <TableCell>
-                  <Button size="icon" variant="ghost">
-                    <Trash2Icon className="w-4 h-4" />
-                    <span className="sr-only">Remove</span>
-                  </Button>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Praça da República</TableCell>
-                <TableCell>200</TableCell>
-                <TableCell>-23.5448, -46.6397</TableCell>
-                <TableCell>Inativo</TableCell>
-                <TableCell>
-                  <Button size="icon" variant="ghost">
-                    <FilePenIcon className="w-4 h-4" />
-                    <span className="sr-only">Editar</span>
-                  </Button>
-                </TableCell>
-                <TableCell>
-                  <Button size="icon" variant="ghost">
-                    <Trash2Icon className="w-4 h-4" />
-                    <span className="sr-only">Remover</span>
-                  </Button>
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
+          <RefreshTableData />
         </div>
       </main>
       <Dialog>
