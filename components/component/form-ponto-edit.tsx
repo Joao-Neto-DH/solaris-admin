@@ -66,9 +66,9 @@ function FormPontoEdit({ data }: { data: Ponto & { id: string } }) {
           <Input
             className="col-span-3"
             id="name"
-            name="ponto"
+            name="nome"
             placeholder="Nome do ponto de refrescamento"
-            defaultValue={data.ponto}
+            defaultValue={data.nome}
           />
         </div>
         <div className="grid items-center grid-cols-4 gap-4">
@@ -80,8 +80,8 @@ function FormPontoEdit({ data }: { data: Ponto & { id: string } }) {
             id="maxPeople"
             placeholder="Número máximo de pessoas"
             type="number"
-            name="total"
-            defaultValue={data.total}
+            name="numero_total_pessoas"
+            defaultValue={data.numero_total_pessoas}
           />
         </div>
         <div className="grid items-center grid-cols-4 gap-4">

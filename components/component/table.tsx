@@ -23,6 +23,7 @@ import { EditIcon } from "lucide-react";
 
 async function RefreshTableData() {
   const { pontos, error, sucesso } = await getAllPontos();
+  // console.log(pontos);
 
   return (
     <Table>
@@ -40,8 +41,8 @@ async function RefreshTableData() {
         {sucesso &&
           pontos.map((ponto) => (
             <TableRow key={ponto.id}>
-              <TableCell>{ponto.ponto}</TableCell>
-              <TableCell>{ponto.total}</TableCell>
+              <TableCell>{ponto.nome}</TableCell>
+              <TableCell>{ponto.numero_total_pessoas}</TableCell>
               <TableCell>{ponto.coords}</TableCell>
               <TableCell>{ponto.estado}</TableCell>
               <TableCell>

@@ -67,7 +67,7 @@ function FormPonto() {
           <Input
             className="col-span-3"
             id="name"
-            name="ponto"
+            name="nome"
             placeholder="Nome do ponto de refrescamento"
           />
         </div>
@@ -80,7 +80,7 @@ function FormPonto() {
             id="maxPeople"
             placeholder="Número máximo de pessoas"
             type="number"
-            name="total"
+            name="numero_total_pessoas"
           />
         </div>
         <div className="grid items-center grid-cols-4 gap-4">

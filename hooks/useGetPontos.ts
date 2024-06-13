@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 export type Ponto = {
   id: string;
   coords: string;
-  ponto: string;
-  total: string;
+  nome: string;
+  numero_total_pessoas: string;
   estado: string;
 };
 
