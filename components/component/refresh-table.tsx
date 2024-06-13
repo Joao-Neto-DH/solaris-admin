@@ -113,7 +113,7 @@ export async function RefreshTable() {
   );
 }
 
-interface SVGProps extends React.ComponentPropsWithoutRef<"svg"> {}
+export interface SVGProps extends React.ComponentPropsWithoutRef<"svg"> {}
 
 function FilePenIcon(props: SVGProps) {
   return (
