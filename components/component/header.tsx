@@ -34,7 +34,7 @@ export function Header() {
           <Link className="hover:text-gray-400" href="/">
             Refrescamento
           </Link>
-          <Link className="hover:text-gray-400" href="#">
+          <Link className="hover:text-gray-400" href="/estatistica">
             Estatística
           </Link>
           {/* <Link className="hover:text-gray-400" href="#">
